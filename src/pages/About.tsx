@@ -240,22 +240,22 @@ const About = () => {
                     onChange={(e) => setMessage(e.target.value)}
                   />
                   <MotionStack layout direction="row" spacing={2}>
-                    <MotionButton
-                      sx={{ bgcolor: "#1565c0", color: "#fff" }}
-                      variant="contained"
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        transition: { delay: 1, duration: 0.6 },
-                      }}
-                      type="submit"
-                      fullWidth
-                      layout
-                    >
-                      Send
-                    </MotionButton>
                     <AnimatePresence>
+                      <MotionButton
+                        sx={{ bgcolor: "#1565c0", color: "#fff" }}
+                        variant="contained"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                          transition: { delay: 1, duration: 0.6 },
+                        }}
+                        type="submit"
+                        fullWidth
+                        layout
+                      >
+                        Send
+                      </MotionButton>
                       {Boolean(
                         email.length > 0 ||
                           name.length > 0 ||
@@ -267,9 +267,21 @@ const About = () => {
                           fullWidth
                           layout
                           sx={{ transformOrigin: "right" }}
-                          initial={{ scaleX: 0, opacity: 0 }}
-                          animate={{ scaleX: 1, opacity: 1 }}
-                          exit={{ scaleX: 0, opacity: 0 }}
+                          initial={{
+                            scaleX: 0,
+                            opacity: 0,
+                            transformOrigin: "right",
+                          }}
+                          animate={{
+                            scaleX: 1,
+                            opacity: 1,
+                            transformOrigin: "right",
+                          }}
+                          exit={{
+                            scaleX: 0,
+                            opacity: 0,
+                            transformOrigin: "right",
+                          }}
                           transition={{ duration: 0.4 }}
                           onClick={() => {
                             setName("");
