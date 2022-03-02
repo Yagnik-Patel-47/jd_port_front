@@ -42,7 +42,7 @@ const SvgObject = ({ isEven }: { isEven: boolean }) => {
           direction="row"
           alignItems="center"
         >
-          {Array.from({ length: isMobile ? 3 : 5 }).map((_num, svgIndex) => (
+          {Array.from({ length: isMobile ? 3 : 4 }).map((_num, svgIndex) => (
             <motion.svg
               style={{
                 y: isEven

@@ -1,20 +1,31 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import { useEffect } from "react";
-import { useAppSelector } from "./hooks/reduxHooks";
+import { useAppSelector, useAppDispatch } from "./hooks/reduxHooks";
 import { AnimatePresence } from "framer-motion";
 import Work from "./pages/Work";
 import About from "./pages/About";
+import { changeMode } from "./redux/theme";
 
 const App = () => {
   const { mode } = useAppSelector((store) => store.theme);
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     mode === "dark"
       ? document.documentElement.classList.add("dark")
       : document.documentElement.classList.remove("dark");
   }, [mode]);
+
+  useEffect(() => {
+    const themeMode = localStorage.getItem("themeMode");
+    if (themeMode === null) {
+      localStorage.setItem("themeMode", "dark");
+    } else {
+      dispatch(changeMode(themeMode as "dark" | "light"));
+    }
+  }, []);
 
   return (
     <AnimatePresence exitBeforeEnter>

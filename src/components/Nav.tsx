@@ -81,11 +81,21 @@ const Nav = ({ routes, animateExit }: Props) => {
                 )
               )}
               {mode === "dark" ? (
-                <IconButton onClick={() => dispatch(changeMode("light"))}>
+                <IconButton
+                  onClick={() => {
+                    dispatch(changeMode("light"));
+                    localStorage.setItem("themeMode", "light");
+                  }}
+                >
                   <MdLightMode />
                 </IconButton>
               ) : (
-                <IconButton onClick={() => dispatch(changeMode("dark"))}>
+                <IconButton
+                  onClick={() => {
+                    dispatch(changeMode("dark"));
+                    localStorage.setItem("themeMode", "dark");
+                  }}
+                >
                   <MdDarkMode />
                 </IconButton>
               )}

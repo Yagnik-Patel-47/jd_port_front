@@ -38,7 +38,9 @@ const WorkCard = ({
     const query = `
       *[_type == "work" && id.current=="${id}"] {
         title,
-        "description": description[].children[].text,
+        description[]{
+          children[]{text, marks}
+        },
         "placeholder": placeholder.asset->url,
         tools,
         "media": media[]{

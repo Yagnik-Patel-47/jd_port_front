@@ -11,7 +11,7 @@ const LoadingScreen = () => {
           duration: 1,
           delay: 0.33,
         }}
-        className="dark:bg-white bg-slate-900 w-28 h-6"
+        className="bg-white w-28 h-6"
       ></motion.div>
       <motion.div
         animate={{ scaleX: ["0%", "100%", "0%"] }}
@@ -20,7 +20,7 @@ const LoadingScreen = () => {
           repeat: Infinity,
           duration: 1,
         }}
-        className="dark:bg-white bg-slate-900 w-28 h-6"
+        className="bg-white w-28 h-6"
       ></motion.div>
       <motion.div
         animate={{ scaleX: ["0%", "100%", "0%"] }}
@@ -30,7 +30,7 @@ const LoadingScreen = () => {
           delay: 0.66,
           duration: 1,
         }}
-        className="dark:bg-white bg-slate-900 w-28 h-6"
+        className="bg-white w-28 h-6"
       ></motion.div>
     </motion.div>
   );

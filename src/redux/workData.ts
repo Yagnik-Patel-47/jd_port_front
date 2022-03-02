@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Work {
   title: string;
-  description: string[];
+  description: { children: { marks: string[]; text: string }[] }[];
   media: { src: string; type: string }[];
   id: string;
   placeholder: null | string;

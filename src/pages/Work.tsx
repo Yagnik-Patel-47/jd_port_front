@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Box, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useLocation, useParams } from "react-router-dom";
-import RiseTypography from "../components/RiseTypography";
+import PopTypography from "../components/PopTypography";
 import client from "../sanityClient";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { setWorkData } from "../redux/workData";
@@ -31,7 +31,7 @@ interface Work {
 const stackContainer = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.3, delayChildren: 0.5 },
+    transition: { staggerChildren: 0.2, delayChildren: 0.5 },
   },
 };
 
@@ -62,7 +62,9 @@ const Work = () => {
       const query = `
         *[_type == "work" && id.current=="${id}"] {
           title,
-          "description": description[].children[].text,
+          description[]{
+            children[]{text, marks}
+          },
           "placeholder": placeholder.asset->url,
           tools,
           "media": media[]{
@@ -193,25 +195,35 @@ const Work = () => {
                   ))}
                 </MotionSwiper>
               )}
-              <RiseTypography
+              <PopTypography
                 fontSize={{ xs: "1.3rem", lg: "2rem" }}
                 fontWeight="500"
                 variant="h4"
               >
                 Description
-              </RiseTypography>
+              </PopTypography>
               <MotionStack sx={{ px: { xs: 0, lg: 20 } }}>
-                {workData.description.map((description, index) => (
-                  <Typography key={index}>{description}</Typography>
+                {workData.description.map((paragraph, index) => (
+                  <WipeBox>
+                    <Typography key={index}>
+                      {paragraph.children.map((para, innerIndex) =>
+                        para.marks.includes("strong") ? (
+                          <strong key={innerIndex}>{para.text}</strong>
+                        ) : (
+                          para.text
+                        )
+                      )}
+                    </Typography>
+                  </WipeBox>
                 ))}
               </MotionStack>
-              <RiseTypography
+              <PopTypography
                 fontSize={{ xs: "1.3rem", lg: "2rem" }}
                 fontWeight="500"
                 variant="h4"
               >
                 Tools used for this project
-              </RiseTypography>
+              </PopTypography>
               <MotionStack
                 justifyContent="space-around"
                 alignItems="center"

@@ -8,7 +8,7 @@ interface Props {
 
 const MotionTypograpghy = motion(Typography);
 
-const RiseTypography = <PROPS extends Props & MotionProps & TypographyProps>({
+const PopTypography = <PROPS extends Props & MotionProps & TypographyProps>({
   children,
   ...rest
 }: PROPS) => {
@@ -20,21 +20,20 @@ const RiseTypography = <PROPS extends Props & MotionProps & TypographyProps>({
           <MotionTypograpghy
             {...rest}
             sx={{ display: "inline-block", willChange: "transform" }}
-            variants={{
-              hidden: { y: "100%" },
-              visible: {
-                y: 0,
-                transition: {
-                  delay: i * 0.1,
-                },
-              },
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{
+              delay: i * 0.1,
+              damping: 7,
+              stiffness: 250,
+              type: "spring",
+              bounce: 1,
+              mass: 0.5,
             }}
-            initial="hidden"
-            animate="visible"
             viewport={{ once: true }}
           >
             {letter === " " && "\u00A0"}
-            {letter}
+            {letter !== " " && letter}
           </MotionTypograpghy>
         </div>
       ))}
@@ -42,4 +41,4 @@ const RiseTypography = <PROPS extends Props & MotionProps & TypographyProps>({
   );
 };
 
-export default RiseTypography;
+export default PopTypography;

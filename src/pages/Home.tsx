@@ -8,7 +8,7 @@ import {
 import Nav from "../components/Nav";
 import SvgPlayground from "../components/home/SvgPlayground";
 import WorkSection from "../components/home/WorkSection";
-import RiseTypography from "../components/RiseTypography";
+import PopTypography from "../components/PopTypography";
 import WipeBox from "../components/WipeBox";
 import { FiInstagram } from "react-icons/fi";
 import { BsTwitter, BsGithub } from "react-icons/bs";
@@ -100,12 +100,12 @@ const Home = () => {
                   Jaydeep Patel
                 </Typography>
               </WipeBox>
-              <RiseTypography
+              <PopTypography
                 fontSize={{ xs: "1.25rem", lg: "1.4rem" }}
                 variant="subtitle1"
               >
                 {title}
-              </RiseTypography>
+              </PopTypography>
             </Stack>
             <motion.button
               className="relative text-white py-2 px-6 w-fit rounded-sm text-lg font-medium tracking-widest flex justify-center items-center group select-none origin-left"
