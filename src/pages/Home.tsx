@@ -12,7 +12,6 @@ import PopTypography from "../components/PopTypography";
 import WipeBox from "../components/WipeBox";
 import { FiInstagram } from "react-icons/fi";
 import { BsTwitter, BsGithub } from "react-icons/bs";
-import { MdArrowRightAlt } from "react-icons/md";
 import { FiArrowUpRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +26,8 @@ const MotionIconButton = motion(IconButton);
 
 const query = `
   *[_type == "aboutme"] {
-    "logo": logo.asset->url,
+    "light_logo": light_logo.asset->url,
+    "dark_logo": dark_logo.asset->url,
     title,
     description[]{
       children[]{text, marks}

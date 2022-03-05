@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: { mode: "light" | "dark" } = {
-  mode: "dark",
+  mode: window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light",
 };
 
 const profileSlice = createSlice({

@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const themeMode = localStorage.getItem("themeMode");
     if (themeMode === null) {
-      localStorage.setItem("themeMode", "dark");
+      localStorage.setItem("themeMode", mode);
     } else {
       dispatch(changeMode(themeMode as "dark" | "light"));
     }

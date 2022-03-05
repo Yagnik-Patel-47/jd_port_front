@@ -20,6 +20,8 @@ const MotionButton = motion(Button);
 
 const query = `
   *[_type == "aboutme"] {
+    "light_logo": light_logo.asset->url,
+    "dark_logo": dark_logo.asset->url,
     title,
     description[]{
       children[]{text, marks}

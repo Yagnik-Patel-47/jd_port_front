@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface About {
-  logo: string;
+  light_logo: string;
+  dark_logo: string;
   title: string;
   description: { children: { marks: string[]; text: string }[] }[];
 }
 
 const initialState: About = {
-  logo: "",
+  light_logo: "",
+  dark_logo: "",
   title: "",
   description: [],
 };
@@ -17,7 +19,8 @@ const profileSlice = createSlice({
   initialState,
   reducers: {
     setAboutData: (state, payload: PayloadAction<About>) => {
-      state.logo = payload.payload.logo;
+      state.light_logo = payload.payload.light_logo;
+      state.dark_logo = payload.payload.dark_logo;
       state.title = payload.payload.title;
       state.description = payload.payload.description;
     },

@@ -23,9 +23,9 @@ const PopTypography = <PROPS extends Props & MotionProps & TypographyProps>({
             initial={{ scale: 0.5, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{
-              delay: i * 0.1,
-              damping: 7,
+              delay: i * 0.05,
               stiffness: 250,
+              damping: 7,
               type: "spring",
               bounce: 1,
               mass: 0.5,

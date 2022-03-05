@@ -27,7 +27,7 @@ const Nav = ({ routes, animateExit }: Props) => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [navOpen, setNavOpen] = useState(false);
   const { mode } = useAppSelector((store) => store.theme);
-  const { logo } = useAppSelector((store) => store.about);
+  const { light_logo, dark_logo } = useAppSelector((store) => store.about);
   const dispatch = useAppDispatch();
 
   return (
@@ -56,7 +56,11 @@ const Nav = ({ routes, animateExit }: Props) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <img src={logo} className="w-auto h-12" alt="logo" />
+          <img
+            src={mode === "dark" ? dark_logo : light_logo}
+            className="w-auto h-12"
+            alt="logo"
+          />
           {!isMobile && (
             <Stack direction="row" alignItems="center" spacing={5}>
               {routes.map((route, index) =>
