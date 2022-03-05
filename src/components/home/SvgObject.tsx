@@ -57,7 +57,7 @@ const SvgObject = ({ isEven }: { isEven: boolean }) => {
               }}
               key={svgIndex}
               height="32"
-              stroke={mode === "dark" ? "#aaa" : "#333"}
+              stroke={mode === "dark" ? "#FF1818" : "#5463FF"}
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"

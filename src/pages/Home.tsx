@@ -13,6 +13,7 @@ import WipeBox from "../components/WipeBox";
 import { FiInstagram } from "react-icons/fi";
 import { BsTwitter, BsGithub } from "react-icons/bs";
 import { MdArrowRightAlt } from "react-icons/md";
+import { FiArrowUpRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../hooks/reduxHooks";
@@ -26,6 +27,7 @@ const MotionIconButton = motion(IconButton);
 
 const query = `
   *[_type == "aboutme"] {
+    "logo": logo.asset->url,
     title,
     description[]{
       children[]{text, marks}
@@ -74,7 +76,7 @@ const Home = () => {
         ]}
         animateExit={false}
       />
-      <section className="flex flex-col transition duration-500 h-full bg-[#f7fff7] dark:bg-[#1c1d25]">
+      <section className="flex flex-col transition duration-500 h-full bg-[#ECECEC] dark:bg-[#1c1d25]">
         <SvgPlayground />
         <Box
           sx={{
@@ -120,12 +122,12 @@ const Home = () => {
               onClick={() => navigate("/about")}
             >
               <span className="z-[2]">About Me</span>
-              <MdArrowRightAlt
+              <FiArrowUpRight
                 fontSize="2rem"
-                className="z-[2] absolute -right-4 top-1/2 transform -translate-y-1/2 group-hover:translate-x-2 transition duration-300 text-slate-900 dark:text-white"
+                className="z-[2] absolute -right-4 top-1/2 transform -translate-y-1/2 group-hover:translate-x-2 transition duration-300 text-slate-900 dark:text-white group-hover:-translate-y-full"
               />
               <div className="absolute top-0 left-0 h-full w-full overflow-hidden rounded-sm">
-                <div className="h-full w-full bg-gradient-to-r from-[#ef3636] to-[#f06449] before:bg-[#101b3b]/90 before:h-full before:w-full before:left-0 before:top-0 absolute before:absolute before:transform before:-translate-x-full group-hover:before:translate-x-0 before:transition before:duration-700 after:bg-[#235aa6]/80 after:h-full after:w-full after:left-0 after:top-0 after:absolute after:transform after:translate-x-full group-hover:after:translate-x-0 after:transition after:duration-700"></div>
+                <div className="h-full w-full bg-gradient-to-r from-[#DA1212] to-[#FF1818] before:bg-[#5463FF]/90 before:h-full before:w-full before:left-0 before:top-0 absolute before:absolute before:transform before:-translate-x-full group-hover:before:translate-x-0 before:transition before:duration-700 after:bg-[#235aa6]/80 after:h-full after:w-full after:left-0 after:top-0 after:absolute after:transform after:translate-x-full group-hover:after:translate-x-0 after:transition after:duration-700"></div>
               </div>
             </motion.button>
           </Stack>

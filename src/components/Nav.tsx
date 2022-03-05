@@ -27,6 +27,7 @@ const Nav = ({ routes, animateExit }: Props) => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [navOpen, setNavOpen] = useState(false);
   const { mode } = useAppSelector((store) => store.theme);
+  const { logo } = useAppSelector((store) => store.about);
   const dispatch = useAppDispatch();
 
   return (
@@ -55,10 +56,7 @@ const Nav = ({ routes, animateExit }: Props) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <img
-            src="https://static.wixstatic.com/media/e42054_0111945559fa4b4eba2089a2e4c21737~mv2.png/v1/fill/w_60,h_60,al_c,q_85,usm_0.66_1.00_0.01/Frame%201_jpg.webp"
-            alt="logo"
-          />
+          <img src={logo} className="w-auto h-12" alt="logo" />
           {!isMobile && (
             <Stack direction="row" alignItems="center" spacing={5}>
               {routes.map((route, index) =>

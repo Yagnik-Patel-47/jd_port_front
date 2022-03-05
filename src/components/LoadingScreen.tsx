@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const LoadingScreen = () => {
   return (
-    <motion.div className="fixed inset-0 bg-[#101b3b] flex justify-center items-center z-[10] flex-col space-y-4">
+    <motion.div className="fixed inset-0 bg-[#DA1212] flex justify-center items-center z-[10] flex-col space-y-4">
       <motion.div
         animate={{ scaleX: ["0%", "100%", "0%"] }}
         transition={{

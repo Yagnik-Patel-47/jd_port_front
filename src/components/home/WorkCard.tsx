@@ -106,7 +106,7 @@ const WorkCard = ({
                 top: 0,
                 left: 0,
               }}
-              className="bg-gradient-to-l to-[rgba(16,27,59,.9)] from-[#11396de6] opacity-[0.9]"
+              className="bg-gradient-to-l from-[#fff] dark:from-[#000] dark:to-[#FF1818] via-[#5463FF] to-[#5463FF] opacity-[0.6]"
               transition={{ duration: 0.4, ease: [0.46, -0.04, 0.5, 1] }}
               initial={{ x: "-100%" }}
               exit={{ x: "-100%" }}
@@ -150,7 +150,7 @@ const WorkCard = ({
               className=" absolute -right-4 top-1/2 transform -translate-y-1/2 group-hover:translate-x-2 transition duration-300"
             />
             <div className="absolute top-0 left-0 h-full w-full overflow-hidden rounded-sm z-[-1]">
-              <div className="h-full w-full bg-gradient-to-r from-[#ef3636] to-[#f06449] before:bg-gradient-to-r before:from-[#101b3b] before:to-[#235aa6] before:h-full before:w-full before:left-0 before:top-0 absolute before:absolute before:transform before:-translate-x-full group-hover:before:translate-x-60 before:transition before:duration-700"></div>
+              <div className="h-full w-full bg-gradient-to-r from-[#DA1212] to-[#FF1818] before:bg-gradient-to-r before:from-[#101b3b] before:to-[#235aa6] before:h-full before:w-full before:left-0 before:top-0 absolute before:absolute before:transform before:-translate-x-full group-hover:before:translate-x-60 before:transition before:duration-700"></div>
             </div>
           </button>
         </Stack>
@@ -188,7 +188,7 @@ const WorkCard = ({
             top: 0,
             left: 0,
           }}
-          className="bg-gradient-to-r from-[#101b3b] to-[#235aa6]"
+          className="bg-gradient-to-r to-[#fff] from-[#FF1818] dark:to-[#000]"
           whileInView={{ x: "100%" }}
           transition={{ duration: 1, ease: [0.83, 0, 0.17, 1] }}
           viewport={{ once: true }}
