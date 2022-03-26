@@ -2,13 +2,11 @@ import Nav from "../components/Nav";
 import { Typography, Box, Stack, TextField, Button } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import WipeBox from "../components/WipeBox";
-import { FormEvent, ReactNode, useEffect, useRef, useState } from "react";
+import { FormEvent, ReactNode, useRef, useState } from "react";
 import { RiUser4Line } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { SiBlender, SiUnrealengine, SiAdobeaftereffects } from "react-icons/si";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import client from "../sanityClient";
-import { setAboutData } from "../redux/about";
+import { useAppSelector } from "../hooks/reduxHooks";
 import LoadingScreen from "../components/LoadingScreen";
 import emailjs from "@emailjs/browser";
 
@@ -17,17 +15,6 @@ const MotionTypography = motion(Typography);
 const MotionStack = motion(Stack);
 const MotionTextField = motion(TextField);
 const MotionButton = motion(Button);
-
-const query = `
-  *[_type == "aboutme"] {
-    "light_logo": light_logo.asset->url,
-    "dark_logo": dark_logo.asset->url,
-    title,
-    description[]{
-      children[]{text, marks}
-    },
-  }[0]
-`;
 
 const stackContainer = {
   hidden: {},
@@ -49,24 +36,11 @@ const toolVariant = {
 
 const About = () => {
   const tools = [<SiBlender />, <SiAdobeaftereffects />, <SiUnrealengine />];
-  const dispatch = useAppDispatch();
   const { title, description } = useAppSelector((store) => store.about);
   const formRef = useRef<HTMLFormElement>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  useEffect(() => {
-    if (title === "") {
-      client
-        .fetch(query)
-        .then((data) => {
-          dispatch(setAboutData(data));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, []);
   const submitForm = (e: FormEvent) => {
     e.preventDefault();
     emailjs

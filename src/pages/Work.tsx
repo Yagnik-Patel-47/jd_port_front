@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { setWorkData } from "../redux/workData";
 import { SiBlender, SiUnrealengine, SiAdobeaftereffects } from "react-icons/si";
 import LoadingScreen from "../components/LoadingScreen";
+import { getWorkData } from "../utils/queries";
 
 const MotionBox = motion(Box);
 const MotionStack = motion(Stack);
@@ -51,6 +52,7 @@ const Work = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const workData = useAppSelector((store) => store.workData);
+  const aboutData = useAppSelector((store) => store.about);
   const tools: any = {
     ue4: <SiUnrealengine />,
     blender: <SiBlender />,
@@ -59,28 +61,7 @@ const Work = () => {
 
   useEffect(() => {
     if (workData.title === "") {
-      const query = `
-        *[_type == "work" && id.current=="${id}"] {
-          title,
-          description[]{
-            children[]{text, marks}
-          },
-          "placeholder": placeholder.asset->url,
-          tools,
-          "media": media[]{
-            _type=="videoType" => {
-              "src": video.asset->url,
-              type
-            },
-            _type=="imageType" => {
-              "src": image.asset->url,
-              type
-            }
-          },
-          "id": id.current,
-        }[0]
-      `;
-      client.fetch(query).then((data) => {
+      client.fetch(getWorkData(id!)).then((data) => {
         dispatch(setWorkData(data));
       });
     }
@@ -88,7 +69,7 @@ const Work = () => {
 
   return (
     <>
-      {workData.title === "" ? (
+      {workData.title === "" || aboutData.title === "" ? (
         <LoadingScreen />
       ) : (
         <>
@@ -120,21 +101,8 @@ const Work = () => {
                   <motion.img
                     src={workData.media[0].src}
                     alt="work image"
-                    layoutId={
-                      location.state === "layoutAnimate" ? workData.id : ""
-                    }
+                    layoutId={workData.id}
                     className="md:w-3/5 h-full object-cover mx-auto"
-                    initial={
-                      location.state === "layoutAnimate"
-                        ? { opacity: 1 }
-                        : { opacity: 0 }
-                    }
-                    animate={
-                      location.state === "layoutAnimate" ? {} : { opacity: 1 }
-                    }
-                    transition={
-                      location.state === "layoutAnimate" ? {} : { duration: 1 }
-                    }
                   />
                 ) : (
                   <motion.video
@@ -144,20 +112,7 @@ const Work = () => {
                     poster={
                       workData.placeholder !== null ? workData.placeholder : ""
                     }
-                    layoutId={
-                      location.state === "layoutAnimate" ? workData.id : ""
-                    }
-                    initial={
-                      location.state === "layoutAnimate"
-                        ? { opacity: 1 }
-                        : { opacity: 0 }
-                    }
-                    animate={
-                      location.state === "layoutAnimate" ? {} : { opacity: 1 }
-                    }
-                    transition={
-                      location.state === "layoutAnimate" ? {} : { duration: 1 }
-                    }
+                    layoutId={workData.id}
                   ></motion.video>
                 )
               ) : (
@@ -165,15 +120,6 @@ const Work = () => {
                   navigation={true}
                   modules={[Navigation]}
                   loop={true}
-                  initial={
-                    location.state === "layoutAnimate" ? {} : { opacity: 0 }
-                  }
-                  animate={
-                    location.state === "layoutAnimate" ? {} : { opacity: 1 }
-                  }
-                  transition={
-                    location.state === "layoutAnimate" ? {} : { duration: 1 }
-                  }
                   layoutId={workData.id}
                 >
                   {workData.media.map((media, index) => (

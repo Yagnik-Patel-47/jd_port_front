@@ -6,9 +6,13 @@ import { AnimatePresence } from "framer-motion";
 import Work from "./pages/Work";
 import About from "./pages/About";
 import { changeMode } from "./redux/theme";
+import client from "./sanityClient";
+import { getAboutData } from "./utils/queries";
+import { setAboutData } from "./redux/about";
 
 const App = () => {
   const { mode } = useAppSelector((store) => store.theme);
+  const { title } = useAppSelector((store) => store.about);
   const location = useLocation();
   const dispatch = useAppDispatch();
 
@@ -24,6 +28,17 @@ const App = () => {
       localStorage.setItem("themeMode", mode);
     } else {
       dispatch(changeMode(themeMode as "dark" | "light"));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (title === "") {
+      client
+        .fetch(getAboutData)
+        .then((data) => {
+          dispatch(setAboutData(data));
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
 

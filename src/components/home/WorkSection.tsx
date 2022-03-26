@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import WorkCard from "./WorkCard";
 import client from "../../sanityClient";
 import { useEffect, useState } from "react";
+import { getAllWorkData } from "../../utils/queries";
 
 const MotionTypography = motion(Typography);
 
@@ -16,25 +17,8 @@ interface WorkForCard {
 
 const WorkSection = () => {
   const [worksData, setWorksData] = useState<WorkForCard[]>([]);
-  const query = `
-  *[_type == "work"] | order(title) {
-    "media": media[]{
-      _type=="videoType" => {
-        "src": video.asset->url,
-        type
-      },
-      _type=="imageType" => {
-        "src": image.asset->url,
-        type
-      }
-    },
-    title,
-    short_description,
-    "id": id.current,
-    "placeholder": placeholder.asset->url
-  }`;
   useEffect(() => {
-    client.fetch(query).then((data) => setWorksData(data));
+    client.fetch(getAllWorkData).then((data) => setWorksData(data));
   }, []);
   return (
     <section id="work">

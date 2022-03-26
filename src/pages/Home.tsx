@@ -15,25 +15,11 @@ import { BsTwitter, BsGithub } from "react-icons/bs";
 import { FiArrowUpRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../hooks/reduxHooks";
-import { setAboutData } from "../redux/about";
-import { useEffect } from "react";
-import client from "../sanityClient";
+import { useAppSelector } from "../hooks/reduxHooks";
 import LoadingScreen from "../components/LoadingScreen";
 
 const MotionStack = motion(Stack);
 const MotionIconButton = motion(IconButton);
-
-const query = `
-  *[_type == "aboutme"] {
-    "light_logo": light_logo.asset->url,
-    "dark_logo": dark_logo.asset->url,
-    title,
-    description[]{
-      children[]{text, marks}
-    },
-  }[0]
-`;
 
 const container = {
   hidden: {},
@@ -52,20 +38,7 @@ const icon = {
 const Home = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { title } = useAppSelector((store) => store.about);
-
-  useEffect(() => {
-    if (title === "") {
-      client
-        .fetch(query)
-        .then((data) => {
-          dispatch(setAboutData(data));
-        })
-        .catch((err) => console.log(err));
-    }
-  }, []);
-
   return (
     <>
       {title === "" && <LoadingScreen />}
